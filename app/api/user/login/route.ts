@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
 
         data: {
           _id: user._id.toString(),
-          fullName: user.name,
+          name: user.name,
           phone: user.phone,
           role: user.role,
         },
