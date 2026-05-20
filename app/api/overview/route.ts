@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextRequest, NextResponse } from "next/server";
-import { Overview } from "@/Interfaces/overviewInterface";
 import {
   getPurchaseCollection,
   getSalesCollection,
@@ -8,7 +7,8 @@ import {
   getProductCollection,
   getPaymentsCollection,
 } from "@/lib/database/db_collections";
-import { PaymentMethod } from "@/Interfaces/paymentInterface";
+import { PaymentMethod } from "@/interfaces/saleInterfaces";
+import { Overview } from "@/interfaces/overviewInterface";
 
 type DateRange = { startDate?: string; endDate?: string };
 
