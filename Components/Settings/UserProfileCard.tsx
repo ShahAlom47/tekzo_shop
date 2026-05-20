@@ -1,4 +1,4 @@
-import { User } from "@/Interfaces/userInterfaces";
+import { User } from "@/interfaces/userInterfaces";
 import {
   updateUserInfo,
   updateUserPassword,
@@ -36,7 +36,7 @@ export function ProfileCard({ currentUser }: { currentUser: User }) {
     try {
       setLoading(true);
 
-      const res = await updateUserInfo(id, { fullName: name });
+      const res = await updateUserInfo(id, { name: name });
 
       if (res?.success) {
         toast.success("Name updated successfully");

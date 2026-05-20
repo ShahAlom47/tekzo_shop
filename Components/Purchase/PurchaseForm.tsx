@@ -1,6 +1,6 @@
 "use client";
 
-import { Purchase } from "@/Interfaces/purchaseInterface";
+import { Purchase } from "@/interfaces/purchaseInterface";
 import React, { useEffect, useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 

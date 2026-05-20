@@ -1,6 +1,6 @@
-import { AddCustomerFormInputs } from "@/Interfaces/customerInterface";
+import { AddCustomerFormInputs } from "@/interfaces/customerInterface";
 import { request } from "../apiRequests";
-import { GetAllCategoryParams } from "@/Interfaces/categoryInterfaces";
+import { GetAllCategoryParams } from "@/interfaces/categoryInterfaces";
 
 export const addCustomer = async (data:AddCustomerFormInputs) => {
   return request("POST", "/customers/add", { ...data }, );

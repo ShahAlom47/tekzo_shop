@@ -4,7 +4,7 @@ import { DashPaginationButton } from "@/Components/CommonComponents/DashPaginati
 import SaleFilter from "@/Components/Sales/SaleFilter";
 import SalesDataTable, { SaleWithPayment } from "@/Components/Sales/SalesDataTable";
 import SaleSummary from "@/Components/Sales/SaleSummary";
-import { SalesSummary } from "@/Interfaces/saleInterfaces";
+import { SalesSummary } from "@/interfaces/saleInterfaces";
 import { getAllSales } from "@/lib/allApiRequest/salesRequest/salesRequest";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";

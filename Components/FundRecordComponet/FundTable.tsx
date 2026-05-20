@@ -1,7 +1,7 @@
 "use client";
 
 import { CustomTable } from "../CommonComponents/CustomTable";
-import { FundRecord } from "@/Interfaces/fundRecordInterface";
+import { FundRecord } from "@/interfaces/fundRecordInterface";
 import { useState } from "react";
 import CustomModal from "../CommonComponents/CustomModal";
 import FundForm from "./FundForm";

@@ -9,7 +9,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 
-import { Product, ProductFormData } from "@/Interfaces/productInterface";
+import { Product, ProductFormData } from "@/interfaces/productInterface";
 import ProductForm from "@/Components/Products/ProductForm";
 import {
   getSingleProduct,

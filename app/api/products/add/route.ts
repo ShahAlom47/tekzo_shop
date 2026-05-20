@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { getProductCollection } from "@/lib/database/db_collections";
 import { NextRequest, NextResponse } from "next/server";
-import { ProductFormData } from "@/Interfaces/productInterface";
+import { ProductFormData } from "@/interfaces/productInterface";
 
 export async function POST(req: NextRequest) {
   try {

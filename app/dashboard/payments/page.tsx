@@ -4,7 +4,7 @@ import Loading from "@/app/loading";
 import { DashPaginationButton } from "@/Components/CommonComponents/DashPaginationButton";
 import PaymentDataTable from "@/Components/PaymentComponent/PaymentDataTable";
 import PaymentHeader from "@/Components/PaymentComponent/PaymentHeader";
-import { Payment } from "@/Interfaces/paymentInterface";
+import { Payment } from "@/interfaces/paymentInterface";
 import { getPayments } from "@/lib/allApiRequest/paymentRequest/paymentRequest";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";

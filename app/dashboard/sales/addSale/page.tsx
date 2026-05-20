@@ -3,9 +3,9 @@
 import CustomerSelect from "@/Components/CommonComponents/CustomerSelect";
 import ProductSelect from "@/Components/Sales/ProductSelect";
 import { useCustomers } from "@/hook/useCustomers";
-import { Customer } from "@/Interfaces/customerInterface";
-import { ProductUnit } from "@/Interfaces/productInterface";
-import { AddSaleRequest } from "@/Interfaces/saleInterfaces";
+import { Customer } from "@/interfaces/customerInterface";
+import { ProductUnit } from "@/interfaces/productInterface";
+import { AddSaleRequest } from "@/interfaces/saleInterfaces";
 import { addSale } from "@/lib/allApiRequest/salesRequest/salesRequest";
 import React, { useState } from "react";
 import toast from "react-hot-toast";

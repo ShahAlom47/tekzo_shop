@@ -1,5 +1,5 @@
 
-import {  ExpenseFormType, GetExpensesParams } from "@/Interfaces/expensesInterface";
+import {  ExpenseFormType, GetExpensesParams } from "@/interfaces/expensesInterface";
 import { request } from "../apiRequests";
 
 

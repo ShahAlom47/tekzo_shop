@@ -2,7 +2,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ObjectId } from "mongodb";
 import { getUserCollection } from "@/lib/database/db_collections";
-import { UserRole } from "@/Interfaces/userInterfaces";
+import { UserRole } from "@/interfaces/userInterfaces";
 
 export async function PATCH(
   req: NextRequest,
@@ -41,7 +41,7 @@ export async function PATCH(
     // 🔥 SECURITY (VERY IMPORTANT)
 
     // ❌ OWNER change block
-    if (user.role === "OWNER") {
+    if (user.role === "admin") {
       return NextResponse.json(
         { success: false, message: "Cannot modify OWNER" },
         { status: 403 }

@@ -1,4 +1,4 @@
-import { AddPaymentFormType, Payment } from "@/Interfaces/paymentInterface";
+import { AddPaymentFormType, Payment } from "@/interfaces/paymentInterface";
 import { request } from "../apiRequests";
 
 interface ParamsType {

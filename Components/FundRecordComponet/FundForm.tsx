@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { FundRecord } from "@/Interfaces/fundRecordInterface";
+import { FundRecord } from "@/interfaces/fundRecordInterface";
 
 interface Props {
   initialData?: FundRecord;

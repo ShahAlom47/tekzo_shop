@@ -6,7 +6,7 @@ import {
   getProductCollection,
   getPaymentsCollection,
 } from "@/lib/database/db_collections";
-import { Sale, SaleProduct } from "@/Interfaces/saleInterfaces";
+import { Sale, SaleProduct } from "@/interfaces/saleInterfaces";
 
 export async function POST(req: NextRequest) {
   try {

@@ -5,7 +5,7 @@ import { DashPaginationButton } from "@/Components/CommonComponents/DashPaginati
 import AddExpenseForm from "@/Components/Expenses/AddExpenses";
 import ExpenseFilter from "@/Components/Expenses/ExpenseFilter";
 import ExpensesTable from "@/Components/Expenses/ExpensesTable";
-import { Expense } from "@/Interfaces/expensesInterface";
+import { Expense } from "@/interfaces/expensesInterface";
 import { getExpenses } from "@/lib/allApiRequest/expensesRequest/expensesRequest";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";

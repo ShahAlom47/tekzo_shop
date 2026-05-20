@@ -1,4 +1,4 @@
-import { PaymentMethod } from "@/Interfaces/paymentInterface";
+import { PaymentMethod } from "@/interfaces/paymentInterface";
 
 
 export interface Overview {

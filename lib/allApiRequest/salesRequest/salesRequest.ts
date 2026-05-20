@@ -1,4 +1,4 @@
-import { AddSaleRequest, Sale } from "@/Interfaces/saleInterfaces";
+import { AddSaleRequest, Sale } from "@/interfaces/saleInterfaces";
 import { request } from "../apiRequests";
 
 interface ParamsType {

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { AddCustomerFormInputs, Customer } from "@/Interfaces/customerInterface";
+import { AddCustomerFormInputs, Customer } from "@/interfaces/customerInterface";
 import { updateCustomer } from "@/lib/allApiRequest/customerRequest/customerRequest";
 import toast, { Toaster } from "react-hot-toast";
 

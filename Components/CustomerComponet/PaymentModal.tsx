@@ -1,5 +1,5 @@
 
-import { PaymentFormData } from "@/Interfaces/saleInterfaces";
+import { PaymentFormData } from "@/interfaces/saleInterfaces";
 
 
 type PaymentModalProps = {

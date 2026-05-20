@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { Customer } from "@/Interfaces/customerInterface";
+import { Customer } from "@/interfaces/customerInterface";
 import { getCustomer } from "@/lib/allApiRequest/customerRequest/customerRequest";
 
 

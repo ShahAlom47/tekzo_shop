@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getSingleCustomer } from "@/lib/allApiRequest/customerRequest/customerRequest";
-import { CustomerDetailsData } from "@/Interfaces/customerInterface";
+import { CustomerDetailsData } from "@/interfaces/customerInterface";
 
 const fetchCustomer = async (id: string): Promise<CustomerDetailsData> => {
   const res = await getSingleCustomer(id);

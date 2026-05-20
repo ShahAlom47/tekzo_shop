@@ -1,4 +1,4 @@
-import { OverviewFilter } from "@/Interfaces/overviewInterface";
+import { OverviewFilter } from "@/interfaces/overviewInterface";
 import { request } from "../apiRequests";
 
 // 🔹 Params type for Overview API

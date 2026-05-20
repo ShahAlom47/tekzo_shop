@@ -1,4 +1,4 @@
-import { Phone, Mail, MapPin } from "lucide-react";
+
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function CustomerHeader({ customer, due, onPay }: any) {
@@ -7,9 +7,9 @@ export default function CustomerHeader({ customer, due, onPay }: any) {
       <div>
         <h1 className="text-2xl font-bold">{customer?.name}</h1>
         <div className="text-sm text-gray-500 mt-2 space-y-1">
-          <p className="flex gap-2"><Phone size={14}/> {customer?.phone}</p>
-          <p className="flex gap-2"><Mail size={14}/> {customer?.email}</p>
-          <p className="flex gap-2"><MapPin size={14}/> {customer?.address}</p>
+          <p className="flex gap-2">Phone: {customer?.phone}</p>
+          <p className="flex gap-2">Email: {customer?.email}</p>
+          <p className="flex gap-2">Address: {customer?.address}</p>
         </div>
       </div>
 

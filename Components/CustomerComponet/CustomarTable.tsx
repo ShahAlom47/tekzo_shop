@@ -1,6 +1,6 @@
 'use client'
 
-import { Customer } from "@/Interfaces/customerInterface";
+import { Customer } from "@/interfaces/customerInterface";
 import { CustomTable } from "../CommonComponents/CustomTable";
 import DeleteCustomerButton from "./DeleteCustomerButton";
 import CustomModal from "../CommonComponents/CustomModal";

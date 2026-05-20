@@ -2,7 +2,7 @@
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useEffect } from "react";
-import { Category } from "@/Interfaces/categoryInterfaces";
+import Category from "@/interfaces/categoryInterfaces";
 
 interface Props {
   defaultValues?: Partial<Category>;

@@ -3,7 +3,7 @@
 import {
   expenseCategoryOptions,
   ExpenseFormType,
-} from "@/Interfaces/expensesInterface";
+} from "@/interfaces/expensesInterface";
 import { addExpenses } from "@/lib/allApiRequest/expensesRequest/expensesRequest";
 import React, { useState } from "react";
 import toast from "react-hot-toast";

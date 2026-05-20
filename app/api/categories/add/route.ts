@@ -2,7 +2,7 @@ import { getCategoryCollection } from "@/lib/database/db_collections";
 import { NextRequest, NextResponse } from "next/server";
 import slugify from "slugify";
 import { ObjectId } from "mongodb";
-import { Category } from "@/Interfaces/categoryInterfaces";
+import Category from "@/interfaces/categoryInterfaces";
 
 export async function POST(req: NextRequest) {
   try {

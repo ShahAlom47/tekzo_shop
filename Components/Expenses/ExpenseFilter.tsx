@@ -3,7 +3,7 @@
 import {
   ExpenseCategory,
   expenseCategoryOptions,
-} from "@/Interfaces/expensesInterface";
+} from "@/interfaces/expensesInterface";
 import { useState } from "react";
 
 interface GetExpensesParams {

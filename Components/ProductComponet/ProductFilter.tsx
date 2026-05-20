@@ -4,7 +4,7 @@ import { useState } from "react";
 import {
   GetAllProductParams,
   SortOptions,
-} from "@/Interfaces/productInterface";
+} from "@/interfaces/productInterface";
 import { useCategories } from "@/hook/useCategory";
 import CategorySelect from "../Categories/CategorySelect";
 

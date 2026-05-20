@@ -6,7 +6,7 @@ import CustomModal from "@/Components/CommonComponents/CustomModal";
 import { DashPaginationButton } from "@/Components/CommonComponents/DashPaginationButton";
 import SearchBox from "@/Components/CommonComponents/SearchBox";
 import CustomerTable from "@/Components/CustomerComponet/CustomarTable";
-import { Customer } from "@/Interfaces/customerInterface";
+import { Customer } from "@/interfaces/customerInterface";
 import { getCustomer } from "@/lib/allApiRequest/customerRequest/customerRequest";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";

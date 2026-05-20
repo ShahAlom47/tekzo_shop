@@ -1,5 +1,5 @@
 
-import { Purchase } from "@/Interfaces/purchaseInterface";
+import { Purchase } from "@/interfaces/purchaseInterface";
 import { request } from "../apiRequests";
 
 export const addPurchase = async (data: Purchase) => {

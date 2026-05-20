@@ -1,6 +1,6 @@
 import { getCustomerCollection } from "@/lib/database/db_collections";
 import { NextRequest, NextResponse } from "next/server";
-import { Customer } from "@/Interfaces/customerInterface";
+import { Customer } from "@/interfaces/customerInterface";
 
 export async function POST(req: NextRequest) {
   try {

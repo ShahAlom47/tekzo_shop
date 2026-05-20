@@ -3,7 +3,7 @@
 import React from "react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { ProductFormData } from "@/Interfaces/productInterface";
+import { ProductFormData } from "@/interfaces/productInterface";
 import ProductForm from "@/Components/Products/ProductForm";
 import { addProduct } from "@/lib/allApiRequest/productRequest/productRequest";
 

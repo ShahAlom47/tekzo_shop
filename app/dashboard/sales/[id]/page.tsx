@@ -2,7 +2,7 @@
 
 import SaleProductTable from "@/Components/Sales/SaleProductTable";
 import { useCustomer } from "@/hook/useCustomer";
-import {  SaleProduct } from "@/Interfaces/saleInterfaces";
+import {  SaleProduct } from "@/interfaces/saleInterfaces";
 import { getSaleById } from "@/lib/allApiRequest/salesRequest/salesRequest";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";

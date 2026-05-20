@@ -34,7 +34,7 @@ export async function GET(
     let users: any[] = [];
 
     // ✅ যদি admin হয় → সব user
-    if (currentUser.role === "OWNER") {
+    if (currentUser.role === "admin") {
       users = await userCollection
         .find({ isDeleted: { $ne: true } })
         .sort({ createdAt: -1 })

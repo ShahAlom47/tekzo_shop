@@ -1,7 +1,7 @@
 "use client";
 
 import { CustomTable } from "../CommonComponents/CustomTable";
-import { User, UserRole } from "@/Interfaces/userInterfaces";
+import { User, UserRole } from "@/interfaces/userInterfaces";
 import { useConfirm } from "@/hook/useConfirm";
 import { updateUserInfo } from "@/lib/allApiRequest/userRequest/userRequest";
 import { useQueryClient } from "@tanstack/react-query";
@@ -18,7 +18,7 @@ const UserTable = ({ users, currentUser }: Props) => {
 
   const handleUpdate = async (
     userId: string,
-    payload: { role?: UserRole; isActive?: boolean }
+    payload: {name?:string; role?: UserRole; isActive?: boolean }
   ) => {
     const res = await updateUserInfo(userId, payload);
 
@@ -47,14 +47,14 @@ const UserTable = ({ users, currentUser }: Props) => {
     if (!ok) return;
 
     handleUpdate(user._id!.toString(), {
-      isActive: !user.isActive,
+      isActive: !user?.isActive,
     });
   };
 
   // ✅ Role Change (OWNER safe)
   const handleRoleChange = async (user: User, role: UserRole) => {
     // ❌ cannot change OWNER
-    if (user.role === "OWNER") {
+    if (user.role === "admin") {
       toast.error("OWNER role can't be changed ❌");
       return;
     }
@@ -71,14 +71,14 @@ const UserTable = ({ users, currentUser }: Props) => {
 
   const data = users.map((user) => {
     const isSelf = user._id?.toString() === currentUser._id?.toString();
-    const isOwner = user.role === "OWNER";
+    const isOwner = user.role === "admin";
 
     return {
       fullName: user.fullName,
       phone: user.phone,
 
       role:
-        currentUser.role === "OWNER" ? (
+        currentUser.role === "admin" ? (
           <select
             value={user.role}
             disabled={isOwner} // 🔥 OWNER disable
@@ -88,7 +88,7 @@ const UserTable = ({ users, currentUser }: Props) => {
             className={`border p-1 rounded disabled:bg-gray-100 disabled:text-gray-500 cursor-pointer`}
           >
             {/* 🔥 OWNER role can't be changed */}
-            <option value="OWNER" disabled>OWNER</option>
+            <option value="admin" disabled>OWNER</option>
             <option value="MANAGER">MANAGER</option>
             <option value="SALESMAN">SALESMAN</option>
             <option value="USER">USER</option>
@@ -98,7 +98,7 @@ const UserTable = ({ users, currentUser }: Props) => {
         ),
 
       status:
-        currentUser.role === "OWNER" ? (
+        currentUser.role === "admin" ? (
           <button
             disabled={isSelf} // 🔥 self disable
             onClick={() => handleToggleActive(user)}

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextRequest, NextResponse } from "next/server";
 import { ObjectId } from "mongodb";
-import bcrypt from "bcrypt";
 import { getUserCollection } from "@/lib/database/db_collections";
 
 export async function PATCH(
@@ -36,28 +35,13 @@ export async function PATCH(
       );
     }
 
-    // 🔐 check old password
-    const isMatch = await bcrypt.compare(
-      oldPassword,
-      user.passwordHash
-    );
-
-    if (!isMatch) {
-      return NextResponse.json(
-        { success: false, message: "Old password incorrect" },
-        { status: 400 }
-      );
-    }
-
-    // 🔥 hash new password
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
 
     // 🔄 update password
     await userCollection.updateOne(
       { _id: new ObjectId(id) },
       {
         $set: {
-          passwordHash: hashedPassword,
+          passwordHash: newPassword,
           updatedAt: new Date().toISOString(),
         },
       }

@@ -5,7 +5,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import {
   AddCustomerFormInputs,
   Customer,
-} from "@/Interfaces/customerInterface";
+} from "@/interfaces/customerInterface";
 import { addCustomer } from "@/lib/allApiRequest/customerRequest/customerRequest";
 import toast, { Toaster } from "react-hot-toast";
 

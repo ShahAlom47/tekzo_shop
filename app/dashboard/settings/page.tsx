@@ -2,7 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useUser } from "@/context/AuthContext";
 import { getUserInfo } from "@/lib/allApiRequest/userRequest/userRequest";
-import { User } from "@/Interfaces/userInterfaces";
+import { User } from "@/interfaces/userInterfaces";
 import { ProfileCard } from "@/Components/Settings/UserProfileCard";
 import UserTable from "@/Components/Settings/UserTable";
 
@@ -39,7 +39,7 @@ export default function Settings() {
 
       {currentUser && <ProfileCard currentUser={currentUser} />}
 
-      {currentUser?.role === "OWNER" && (
+      {currentUser?.role === "admin" && (
         <UserTable users={users} currentUser={currentUser}/>
       )}
     </div>

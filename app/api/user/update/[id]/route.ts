@@ -41,7 +41,7 @@ export async function PATCH(
     }
 
     // ❌ OWNER restriction (only role & status block)
-    if (user.role !== "OWNER") {
+    if (user.role !== "admin") {
       if (role) updateData.role = role;
       if (typeof isActive === "boolean") updateData.isActive = isActive;
     }

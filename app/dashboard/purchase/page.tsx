@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useState } from "react";
 
-import { Purchase, PurchaseSummaryType } from "@/Interfaces/purchaseInterface";
+import { Purchase, PurchaseSummaryType } from "@/interfaces/purchaseInterface";
 import PurchaseDataTable from "@/Components/Purchase/PurchaseDataTable";
 import PurchaseFilter from "@/Components/Purchase/PurchaseFilter";
 import PurchaseSummary from "@/Components/Purchase/PurchaseSummary";

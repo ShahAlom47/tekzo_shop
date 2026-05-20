@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 import CategoryForm from "./CategoryForm";
 import { updateCategory } from "@/lib/allApiRequest/categoryRequest/categoryRequest";
-import { Category } from "@/Interfaces/categoryInterfaces";
+import Category from "@/interfaces/categoryInterfaces";
 
 interface EditCategoryProps {
   category: Category | undefined;

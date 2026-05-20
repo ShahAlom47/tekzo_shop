@@ -1,5 +1,5 @@
 
-import { Category, GetAllCategoryParams } from "@/Interfaces/categoryInterfaces";
+import Category, { GetAllCategoryParams } from "@/interfaces/categoryInterfaces";
 import { request } from "../apiRequests";
 import { ObjectId } from "mongodb";
 

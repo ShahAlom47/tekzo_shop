@@ -5,8 +5,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
 import { addCategory } from "@/lib/allApiRequest/categoryRequest/categoryRequest";
-import { Category } from "@/Interfaces/categoryInterfaces";
 import CategoryForm from "./CategoryForm";
+import Category from "@/interfaces/categoryInterfaces";
 
 const AddCategory: React.FC<{  setModalOpen: (open: boolean) => void }> = ({ setModalOpen }) => {
   const [loading, setLoading] = useState<boolean>(false);

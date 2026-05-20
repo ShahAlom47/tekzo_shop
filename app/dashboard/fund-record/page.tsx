@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import CustomModal from "@/Components/CommonComponents/CustomModal";
-import { FundRecord } from "@/Interfaces/fundRecordInterface";
+import { FundRecord } from "@/interfaces/fundRecordInterface";
 import FundForm from "@/Components/FundRecordComponet/FundForm";
 import {
   addFundRecord,

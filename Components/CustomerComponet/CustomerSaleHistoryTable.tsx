@@ -1,4 +1,4 @@
-import { CustomerSaleHistory } from '@/Interfaces/saleInterfaces';
+import { CustomerSaleHistory } from '@/interfaces/saleInterfaces';
 import React from 'react';
 import { CustomTable } from '../CommonComponents/CustomTable';
 interface PropsType{

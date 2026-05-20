@@ -7,7 +7,6 @@ import { useQuery } from "@tanstack/react-query";
 
 import { deleteCategory, getAllCategories } from "@/lib/allApiRequest/categoryRequest/categoryRequest";
 import { useConfirm } from "@/hook/useConfirm";
-import { Category } from "@/Interfaces/categoryInterfaces";
 import PrimaryButton from "@/Components/CommonComponents/PrimaryButton";
 
 import ErrorPage from "@/app/error";
@@ -17,6 +16,7 @@ import { CustomTable } from "@/Components/CommonComponents/CustomTable";
 import CustomModal from "@/Components/CommonComponents/CustomModal";
 import AddCategory from "@/Components/Categories/AddCategory";
 import EditCategory from "@/Components/Categories/EditCategory";
+import Category from "@/interfaces/categoryInterfaces";
 
 
 const ManageCategory = () => {

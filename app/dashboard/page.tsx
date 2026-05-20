@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getOverview } from "@/lib/allApiRequest/overviewRequest/overviewRequest";
-import {  Overview, OverviewFilter } from "@/Interfaces/overviewInterface";
+import {  Overview, OverviewFilter } from "@/interfaces/overviewInterface";
 import OverviewFilterComponent from "@/Components/Overview/OverviewFilter";
 import OverviewContent from "@/Components/Overview/OverviewContent";
 import Loading from "../loading";

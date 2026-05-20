@@ -1,7 +1,7 @@
 "use client";
 
 import { useCategories } from "@/hook/useCategory";
-import { Product } from "@/Interfaces/productInterface";
+import { Product } from "@/interfaces/productInterface";
 import Link from "next/link";
 
 interface Props {

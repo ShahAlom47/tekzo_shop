@@ -1,7 +1,7 @@
 "use client";
 
 import { CartItem } from "@/app/dashboard/sales/addSale/page";
-import { Product, ProductUnit } from "@/Interfaces/productInterface";
+import { Product, ProductUnit } from "@/interfaces/productInterface";
 import { getAllProduct } from "@/lib/allApiRequest/productRequest/productRequest";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";

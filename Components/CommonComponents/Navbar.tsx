@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { UserRole } from "@/Interfaces/userInterfaces";
+import { UserRole } from "@/interfaces/userInterfaces";
 import { useUser } from "@/context/AuthContext";
 
 export default function StoreNavbar() {

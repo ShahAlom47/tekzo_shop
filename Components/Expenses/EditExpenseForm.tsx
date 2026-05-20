@@ -4,7 +4,7 @@ import {
   expenseCategoryOptions,
   Expense,
   ExpenseFormType,
-} from "@/Interfaces/expensesInterface";
+} from "@/interfaces/expensesInterface";
 import {
   addExpenses,
   editExpenses,

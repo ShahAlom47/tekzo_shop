@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Overview } from "@/Interfaces/overviewInterface";
+import { Overview } from "@/interfaces/overviewInterface";
 
 
 interface Props {

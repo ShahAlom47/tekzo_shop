@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextRequest, NextResponse } from "next/server";
 import { getPaymentsCollection } from "@/lib/database/db_collections";
-import { PaymentType } from "@/Interfaces/paymentInterface";
+import { PaymentType } from "@/interfaces/paymentInterface";
 
 export async function POST(req: NextRequest) {
   try {

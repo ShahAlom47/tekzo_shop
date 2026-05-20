@@ -1,6 +1,6 @@
 "use client";
 
-import {  PurchaseSummaryType } from "@/Interfaces/purchaseInterface";
+import {  PurchaseSummaryType } from "@/interfaces/purchaseInterface";
 
 interface Props {
   summary: PurchaseSummaryType;

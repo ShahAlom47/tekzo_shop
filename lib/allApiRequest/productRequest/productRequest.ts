@@ -1,5 +1,5 @@
 
-import { GetAllProductParams, ProductFormData } from "@/Interfaces/productInterface";
+import { GetAllProductParams, ProductFormData } from "@/interfaces/productInterface";
 import { request } from "../apiRequests";
 
 export const getAllProduct = async (params: GetAllProductParams) => {

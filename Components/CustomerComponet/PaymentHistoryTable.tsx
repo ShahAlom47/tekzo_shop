@@ -1,6 +1,6 @@
 "use client";
 
-import { CustomerPaymentHistory } from "@/Interfaces/customerInterface";
+import { CustomerPaymentHistory } from "@/interfaces/customerInterface";
 import { CustomTable } from "../CommonComponents/CustomTable";
 
 type Props = {

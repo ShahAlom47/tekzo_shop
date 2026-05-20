@@ -1,7 +1,6 @@
-import { FundRecord } from "@/Interfaces/fundRecordInterface";
+import { FundRecord } from "@/interfaces/fundRecordInterface";
 import { request } from "../apiRequests";
-import { Category } from "@/Interfaces/categoryInterfaces";
-import { ObjectId } from "bson";
+import { ObjectId } from "mongodb";
 
 interface GetAllCategoryParams {
   currentPage: number;

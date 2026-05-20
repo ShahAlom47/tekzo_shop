@@ -1,5 +1,5 @@
 import { CustomTable } from "../CommonComponents/CustomTable";
-import { Expense } from "@/Interfaces/expensesInterface";
+import { Expense } from "@/interfaces/expensesInterface";
 import { useState } from "react";
 import CustomModal from "../CommonComponents/CustomModal";
 import EditExpenseForm from "./EditExpenseForm";

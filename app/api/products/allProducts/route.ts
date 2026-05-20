@@ -2,7 +2,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getCategoryCollection, getProductCollection } from "@/lib/database/db_collections";
 import { ObjectId } from "mongodb";
-import { Product } from "@/Interfaces/productInterface";
+import { Product } from "@/interfaces/productInterface";
 
 export async function GET(req: NextRequest) {
   try {

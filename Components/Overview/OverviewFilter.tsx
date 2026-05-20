@@ -1,6 +1,6 @@
 "use client";
 
-import { OverviewFilter } from "@/Interfaces/overviewInterface";
+import { OverviewFilter } from "@/interfaces/overviewInterface";
 
 interface Props {
   filter: OverviewFilter;

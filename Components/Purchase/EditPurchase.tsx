@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import PurchaseForm from "@/Components/Purchase/PurchaseForm";
-import { Purchase } from "@/Interfaces/purchaseInterface";
+import { Purchase } from "@/interfaces/purchaseInterface";
 import toast from "react-hot-toast";
 import { editPurchase } from "@/lib/allApiRequest/purchaseRequest/purchaseRequest";
 import { useQueryClient } from "@tanstack/react-query";

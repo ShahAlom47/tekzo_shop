@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getAllProduct } from "@/lib/allApiRequest/productRequest/productRequest";
 import ProductTableView from "@/Components/ProductComponet/ProductTableView ";
-import { GetAllProductParams, Product } from "@/Interfaces/productInterface";
+import { GetAllProductParams, Product } from "@/interfaces/productInterface";
 import ProductCardView from "@/Components/ProductComponet/ProductCardView";
 import { DashPaginationButton } from "@/Components/CommonComponents/DashPaginationButton";
 import ProductFilter from "@/Components/ProductComponet/ProductFilter";

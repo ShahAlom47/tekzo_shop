@@ -2,7 +2,7 @@
 import { getProductCollection } from "@/lib/database/db_collections";
 import { NextRequest, NextResponse } from "next/server";
 import { ObjectId } from "mongodb";
-import { ProductFormData } from "@/Interfaces/productInterface";
+import { ProductFormData } from "@/interfaces/productInterface";
 
 export async function PATCH(
   req: NextRequest,

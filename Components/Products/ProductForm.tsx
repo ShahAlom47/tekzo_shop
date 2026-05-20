@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { useEffect, useMemo } from "react";
-import { Product, ProductFormData } from "@/Interfaces/productInterface";
+import { Product, ProductFormData } from "@/interfaces/productInterface";
 import { useCategories } from "@/hook/useCategory";
 import Input from "../CommonComponents/Input";
 import Select from "../CommonComponents/Select";

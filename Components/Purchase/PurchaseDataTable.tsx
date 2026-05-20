@@ -1,7 +1,7 @@
 'use client';
 import { useConfirm } from "@/hook/useConfirm";
 import { CustomTable } from "../CommonComponents/CustomTable";
-import { Purchase } from "@/Interfaces/purchaseInterface";
+import { Purchase } from "@/interfaces/purchaseInterface";
 import toast from "react-hot-toast";
 import { deletePurchase } from "@/lib/allApiRequest/purchaseRequest/purchaseRequest";
 import { useQueryClient } from "@tanstack/react-query";

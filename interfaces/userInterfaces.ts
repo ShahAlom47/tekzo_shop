@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 
-export type UserRole = "OWNER" | "MANAGER" | "SALESMAN" | "USER";
+export type UserRole = "admin" |"staff";
 
  export interface User {
   _id?: string| ObjectId;                // uuid

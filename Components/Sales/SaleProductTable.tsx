@@ -1,5 +1,5 @@
 
-import { SaleProduct } from "@/Interfaces/saleInterfaces";
+import { SaleProduct } from "@/interfaces/saleInterfaces";
 import { CustomTable } from "../CommonComponents/CustomTable";
 
 interface PropsType {

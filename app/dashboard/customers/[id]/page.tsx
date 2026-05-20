@@ -9,8 +9,8 @@ import CustomerHeader from "@/Components/CustomerComponet/CustomerHeader";
 import SummaryCards from "@/Components/CustomerComponet/SummaryCards";
 import SalesSection from "@/Components/CustomerComponet/SalesSection";
 import PaymentModal from "@/Components/CustomerComponet/PaymentModal";
-import { PaymentMethod } from "@/Interfaces/paymentInterface";
-import { PaymentFormData } from "@/Interfaces/saleInterfaces";
+import { PaymentMethod } from "@/interfaces/paymentInterface";
+import { PaymentFormData } from "@/interfaces/saleInterfaces";
 import PaymentHistoryTable from "@/Components/CustomerComponet/PaymentHistoryTable";
 
 export default function CustomerDetails() {

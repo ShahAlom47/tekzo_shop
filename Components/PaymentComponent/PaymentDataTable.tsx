@@ -1,5 +1,5 @@
 import { CustomTable } from "../CommonComponents/CustomTable";
-import { Payment } from "@/Interfaces/paymentInterface";
+import { Payment } from "@/interfaces/paymentInterface";
 
 interface PropsType {
   payments: Payment[];

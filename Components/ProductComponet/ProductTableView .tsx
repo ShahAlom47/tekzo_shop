@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { CustomTable } from "../CommonComponents/CustomTable";
-import { Product } from "@/Interfaces/productInterface";
+import { Product } from "@/interfaces/productInterface";
 import { useCategories } from "@/hook/useCategory";
 import DeleteProductButton from "./DeleteProductButton";
 
