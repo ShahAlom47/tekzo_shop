@@ -1,29 +1,31 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";
 import { ProductFormData } from "@/interfaces/productInterface";
 import ProductForm from "@/Components/Products/ProductForm";
 import { addProduct } from "@/lib/allApiRequest/productRequest/productRequest";
 
 const AddProduct = () => {
-  const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
-  // Submit handler
   const handleSubmit = async (data: ProductFormData) => {
-   
     try {
-      const res = await addProduct({...data});
+      setLoading(true);
 
-      if (!res.success) throw new Error("Failed to add product");
+      const res = await addProduct({ ...data });
+
+      if (!res.success) {
+        throw new Error("Failed to add product");
+      }
 
       toast.success("Product added successfully!");
-      router.push("/dashboard/products"); 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.error(err);
       toast.error(err.message || "Something went wrong");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -33,8 +35,7 @@ const AddProduct = () => {
         Add New Product
       </h1>
 
-      {/* Product Form */}
-      <ProductForm onSubmit={handleSubmit} />
+      <ProductForm onSubmit={handleSubmit} loading={loading} />
     </div>
   );
 };

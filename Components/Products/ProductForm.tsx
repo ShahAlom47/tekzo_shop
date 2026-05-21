@@ -10,10 +10,15 @@ import SlugInput from "../CommonComponents/SlugInput";
 
 interface ProductFormProps {
   product?: Product;
-  onSubmit: (data: ProductFormData) => void;
+  onSubmit: (data: ProductFormData) => Promise<void>;
+  loading?: boolean;
 }
 
-export default function ProductForm({ product, onSubmit }: ProductFormProps) {
+export default function ProductForm({
+  product,
+  onSubmit,
+  loading,
+}: ProductFormProps) {
   const { categories } = useCategories();
 
   const {
@@ -39,7 +44,7 @@ export default function ProductForm({ product, onSubmit }: ProductFormProps) {
     },
   });
 
-  // ✅ Edit mode data set
+  // Edit mode data set
   useEffect(() => {
     if (product) {
       reset(product);
@@ -66,13 +71,22 @@ export default function ProductForm({ product, onSubmit }: ProductFormProps) {
     { value: "INACTIVE", label: "INACTIVE" },
   ];
 
+  // submit + reset
+  const submitHandler = async (data: ProductFormData) => {
+    await onSubmit(data);
+
+    // add mode হলে reset হবে
+    if (!product) {
+      reset();
+    }
+  };
+
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(submitHandler)}
       className="bg-white p-6 rounded-2xl shadow-md space-y-6"
     >
       <div className="grid md:grid-cols-2 gap-4">
-        
         <Input
           label="Product Name *"
           required
@@ -80,7 +94,6 @@ export default function ProductForm({ product, onSubmit }: ProductFormProps) {
           error={errors.name?.message}
         />
 
-        {/* ✅ SlugInput (auto generate) */}
         <SlugInput
           label="Slug *"
           nameField="name"
@@ -143,16 +156,22 @@ export default function ProductForm({ product, onSubmit }: ProductFormProps) {
         <button
           type="reset"
           onClick={() => reset()}
-          className="px-5 py-2 rounded-lg border border-gray-300 hover:bg-gray-100 transition"
+          disabled={loading}
+          className="px-5 py-2 rounded-lg border border-gray-300 hover:bg-gray-100 transition disabled:opacity-50"
         >
           Reset
         </button>
 
         <button
           type="submit"
-          className="px-5 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition"
+          disabled={loading}
+          className="px-5 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition disabled:opacity-50"
         >
-          {product ? "Update Product" : "Add Product"}
+          {loading
+            ? "Submitting..."
+            : product
+            ? "Update Product"
+            : "Add Product"}
         </button>
       </div>
     </form>
