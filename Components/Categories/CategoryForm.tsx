@@ -80,7 +80,7 @@ useEffect(() => {
           <label htmlFor="parentCategory" className="block mb-1 text-sm font-medium">
             Parent Category <span className="text-gray-400">(optional)</span>
           </label>
-          <select id="parentCategory" {...register("parentCategoryId")} className="my-input w-full">
+          <select id="parentCategory" {...register("parentCategoryId")} className="border border-gray-800 w-full">
             <option value="">None</option>
             {parentCategoryList.map((cat) => (
               <option key={cat._id?cat._id.toString():''} value={cat._id?cat._id.toString():''}>
@@ -92,7 +92,7 @@ useEffect(() => {
       )}
 
       {/* Submit */}
-      <button type="submit" disabled={loading} className="btn-base w-full">
+      <button type="submit" disabled={loading} className=" rounded-sm pl-2 bg-emerald-700 hover:bg-emerald-800 text-white w-full">
         {loading ? "Processing..." : submitText}
       </button>
     </form>

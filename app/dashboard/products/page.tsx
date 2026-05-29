@@ -13,7 +13,7 @@ import ProductFilter from "@/Components/ProductComponet/ProductFilter";
 const Products = () => {
    const [filters, setFilters] = useState<Partial<GetAllProductParams>>({});
     const [page, setPage] = useState(1);
-  const limit = 10;
+  const limit = 30; 
 
 
   const { data, isLoading } = useQuery({

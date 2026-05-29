@@ -25,7 +25,7 @@ const ManageCategory = () => {
   const [modalContent, setModalContent] = useState<"add" | "edit">("add");
   const [selectedCat, setSelectedCat] = useState<Category | undefined>(undefined);
   const [page, setPage] = useState(1);
-  const limit = 10;
+  const limit = 20;
 
   const handleModal = (content: "add" | "edit", data?: Category) => {
     setOpenModal(true);
@@ -54,6 +54,7 @@ const ManageCategory = () => {
     },
     refetchOnWindowFocus: false,
   });
+  console.log("category data", category);
 
   const handleDelete = async (id: string | ObjectId) => {
     const ok = await confirm({

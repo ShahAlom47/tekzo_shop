@@ -5,8 +5,7 @@ import { Product, ProductUnit } from "@/interfaces/productInterface";
 import { getAllProduct } from "@/lib/allApiRequest/productRequest/productRequest";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
-
-
+import Select from "react-select";
 
 interface Props {
   cart: CartItem[];
@@ -30,22 +29,36 @@ const ProductSelect = ({ cart, setCart }: Props) => {
     },
   });
 
-  const allProducts = data || [];
-  const selectedProduct = allProducts.find((p) => p._id.toString() === selectedId);
+  const allProducts = (data || []).filter(
+    (p): p is Product & { _id: string } => Boolean(p._id)
+  );
+
+  const selectedProduct = allProducts.find(
+    (p) => p._id.toString() === selectedId
+  );
+
+  // react-select options
+  const productOptions = allProducts.map((p) => ({
+    value: p._id.toString(),
+    label: `${p.name} - Stock: ${p.currentStock} - ৳${p.sellingPrice}`,
+    product: p,
+  }));
 
   const handleAddProduct = () => {
     if (!selectedProduct) return;
     if (quantity <= 0) return;
 
+    const productId = selectedProduct._id.toString();
     const total = quantity * price;
 
-    const existing = cart.find((c) => c.productId.toString() === selectedProduct._id.toString());
+    const existing = cart.find(
+      (c) => c.productId.toString() === productId
+    );
 
     if (existing) {
-      // Update existing cart item
       setCart(
         cart.map((c) =>
-          c.productId.toString() === selectedProduct._id.toString()
+          c.productId.toString() === productId
             ? {
                 ...c,
                 quantity: c.quantity + quantity,
@@ -57,23 +70,22 @@ const ProductSelect = ({ cart, setCart }: Props) => {
         )
       );
     } else {
-      // Add new cart item
       setCart([
         ...cart,
         {
-          productId: selectedProduct._id.toString(),
+          productId,
           name: selectedProduct.name,
           quantity,
           unit,
           price,
-          costPrice: selectedProduct.costPrice, 
+          costPrice: selectedProduct.costPrice,
           totalPrice: total,
           totalCost: quantity * selectedProduct.costPrice,
         },
       ]);
     }
 
-    // Reset inputs
+    // reset
     setSelectedId("");
     setQuantity(1);
     setUnit("PCS");
@@ -81,13 +93,15 @@ const ProductSelect = ({ cart, setCart }: Props) => {
   };
 
   if (isLoading) return <p>Loading products...</p>;
-  if (isError) return <p className="text-red-500">Error loading products.</p>;
+  if (isError)
+    return <p className="text-red-500">Error loading products.</p>;
 
   return (
     <div className="bg-white p-4 rounded-2xl shadow space-y-3">
       {/* Header */}
       <div className="flex justify-between items-center">
         <h2 className="font-semibold text-lg">Products</h2>
+
         <button
           onClick={handleAddProduct}
           className="bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition"
@@ -97,30 +111,28 @@ const ProductSelect = ({ cart, setCart }: Props) => {
       </div>
 
       {/* Inputs */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
-        {/* Product Select */}
-        <select
-          value={selectedId}
-          onChange={(e) => {
-            const id = e.target.value;
-            setSelectedId(id);
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
+        {/* SEARCH + SELECT */}
+        <div className="md:col-span-2">
+          <Select
+            options={productOptions}
+            value={
+              productOptions.find((o) => o.value === selectedId) || null
+            }
+            onChange={(option) => {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              const opt = option as any;
 
-            const prod = allProducts.find((p) => p._id.toString() === id);
-            setPrice(prod ? prod.sellingPrice : 0);
-          }}
-          className="border p-2 rounded-lg"
-        >
-          <option value="">Select Product</option>
-          {allProducts.map((p) => (
-            <option
-              key={p._id.toString()}
-              value={p._id.toString()}
-              disabled={p.currentStock === 0}
-            >
-              {p.name} - Stock: {p.currentStock} - ৳{p.sellingPrice}
-            </option>
-          ))}
-        </select>
+              setSelectedId(opt?.value || "");
+
+              if (opt?.product) {
+                setPrice(opt.product.sellingPrice);
+              }
+            }}
+            isSearchable
+            placeholder="Search & select product..."
+          />
+        </div>
 
         {/* Quantity */}
         <input
@@ -156,7 +168,7 @@ const ProductSelect = ({ cart, setCart }: Props) => {
         />
       </div>
 
-      {/* Auto Total */}
+      {/* Total */}
       {selectedProduct && (
         <p className="text-right text-sm font-medium">
           Total: ৳ {quantity * price}

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextRequest, NextResponse } from "next/server";
-import { getCategoryCollection, getProductCollection } from "@/lib/database/db_collections";
+import { getProductCollection } from "@/lib/database/db_collections";
 import { ObjectId } from "mongodb";
 import { Product } from "@/interfaces/productInterface";
 
@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
 
     // 🔹 Query params
     const searchTrim = url.searchParams.get("searchTrim")?.trim() || "";
-    const sort = url.searchParams.get("sort") || "asc";
+    const sort = url.searchParams.get("sort") || "newest";
     const minPrice = url.searchParams.get("minPrice");
     const maxPrice = url.searchParams.get("maxPrice");
     const categoryId = url.searchParams.get("category");

@@ -2,7 +2,7 @@ import { ObjectId } from "mongodb";
 // ProductUnit.ts
 export type ProductUnit = "PCS" | "KG" | "LITER" | "BOX" | "Feet";
 export interface Product {
-  _id: ObjectId;
+  _id?: ObjectId |string;
 
   name: string;
   slug: string;
