@@ -7,6 +7,7 @@ import { useCustomers } from "@/hook/useCustomers";
 import { Customer } from "@/interfaces/customerInterface";
 import { addReturn } from "@/lib/allApiRequest/returnRequest/returnRequest";
 import React, { useMemo, useState } from "react";
+import toast from "react-hot-toast";
 
 type Props = {
   onSuccess?: () => void;
@@ -111,10 +112,14 @@ const handleSubmit = async () => {
       createdAt: new Date().toISOString(),
     };
 
-    console.log("RETURN PAYLOAD =>", payload);
 
     const response = await addReturn(payload);
-    console.log("RETURN RESPONSE =>", response);
+    if(!response?.success) {
+        toast.error("Failed to add return");
+        console.log("RETURN RESPONSE =>", response);
+    } else {
+        toast.success("Return added successfully");
+    }   
 
     // reset
     setCart([]);
