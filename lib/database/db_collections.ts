@@ -10,6 +10,7 @@ import { Purchase } from "@/interfaces/purchaseInterface";
 import { FundRecord } from "@/interfaces/fundRecordInterface";
 import Category from "@/interfaces/categoryInterfaces";
 import { Product } from "@/interfaces/productInterface";
+import { Return } from "@/interfaces/returnInterface";
 
 
 export const getUserCollection = async (): Promise<Collection<User>> => {
@@ -57,4 +58,9 @@ export const getFundCollection = async (): Promise<Collection<FundRecord>> => {
   const client = await clientPromise;
   const db: Db = client.db("TekzoBD-Offline-Store-DB"); // Replace with your database name
   return db.collection<FundRecord>("fund-record");
+};
+export const getReturnCollection = async (): Promise<Collection<Return>> => {
+  const client = await clientPromise;
+  const db: Db = client.db("TekzoBD-Offline-Store-DB"); // Replace with your database name
+  return db.collection<Return>("returns");
 };
