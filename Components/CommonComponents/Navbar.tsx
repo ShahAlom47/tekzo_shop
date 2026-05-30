@@ -67,12 +67,17 @@ export default function StoreNavbar() {
     {
       name: "Fund Record",
       href: "/dashboard/fund-record",
-      roles: ["admin"],
+      roles: ["admin", "staff"],
     },
     {
       name: "Settings",
       href: "/dashboard/settings",
       roles: ["admin"],
+    },
+    {
+      name: "Return Products",
+      href: "/dashboard/returns",
+      roles: ["admin", "staff"],
     },
   ];
 
