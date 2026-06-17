@@ -74,14 +74,21 @@ const catName = (catId: string) => {
 
       action: (
         <div className="flex gap-3">
-          <Link
-            href={`/dashboard/products/${item._id}`}
-            className="text-blue-600 hover:underline"
-          >
-            Edit
-          </Link>
+          {(() => {
+            const id = item._id ?? "";
+            return (
+              <>
+                <Link
+                  href={`/dashboard/products/${id}`}
+                  className="text-blue-600 hover:underline"
+                >
+                  Edit
+                </Link>
 
-        <DeleteProductButton productId={item._id.toString()}></DeleteProductButton>
+                <DeleteProductButton productId={id.toString()} />
+              </>
+            );
+          })()}
         </div>
       ),
     };

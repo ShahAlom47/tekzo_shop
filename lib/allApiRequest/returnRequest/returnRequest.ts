@@ -14,7 +14,7 @@ interface ParamsType {
 export const addReturn = async (data: Return) => {
   return request("POST", "/returns/add", {...data});
 }
-export const getAllSales = async (params: ParamsType) => {
+  export const getAllReturn = async (params: ParamsType) => {
   const {
     currentPage,
     limit,
@@ -34,7 +34,7 @@ export const getAllSales = async (params: ParamsType) => {
   if (endDate) queryParams.set("endDate", endDate);
   if (status) queryParams.set("status", status);
 
-  const url = `/sales/allSales?${queryParams.toString()}`;
+  const url = `/returns/allReturn?${queryParams.toString()}`;
 
   return request("GET", url, undefined, undefined, undefined);
 };

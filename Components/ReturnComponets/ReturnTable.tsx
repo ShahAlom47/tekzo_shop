@@ -1,53 +1,112 @@
 "use client";
 
-import React from "react";
+import { getAllReturn } from "@/lib/allApiRequest/returnRequest/returnRequest";
+import { useQuery } from "@tanstack/react-query";
+import React, { useState } from "react";
+import { DashPaginationButton } from "../CommonComponents/DashPaginationButton";
+import { Return } from "@/interfaces/returnInterface";
+import { CustomTable } from "../CommonComponents/CustomTable";
 
 type Props = {
   refresh: boolean;
 };
 
 const ReturnTable = ({ refresh }: Props) => {
-  // future: API fetch using refresh
+  const [page, setPage] = useState(1);
+  const limit = 30;
 
-  const data = [
-    {
-      saleNumber: "S-1001",
-      product: "Mouse",
-      qty: 1,
-      amount: 500,
-      note: "Defective",
+  const { data, isLoading } = useQuery({
+    queryKey: ["returns", page, refresh],
+    queryFn: async () => {
+      return await getAllReturn({
+        currentPage: page,
+        limit,
+      });
     },
-  ];
+    placeholderData: (prev) => prev,
+  });
+console.log(data);
+  if (isLoading) return <p>Loading...</p>;
+
+  const returnData = (data?.data as Return[]) || [];
+  const totalPages = data?.totalPages || 1;
+
+const columns = [
+  { header: "Sale No", accessor: "saleNumber" },
+  { header: "Products", accessor: "products" },
+  { header: "Qty", accessor: "totalQuantity" },
+  { header: "Amount", accessor: "totalAmount" },
+  { header: "Profit", accessor: "totalProfit" },
+  { header: "Note", accessor: "note" },
+  { header: "Date", accessor: "createdAt" },
+  { header: "Action", accessor: "action" },
+];
+const tableData = returnData.map((item) => ({
+  saleNumber: item.saleNumber || "N/A",
+
+  products: (
+    <div className="flex flex-col">
+      {item.products.map((product, index) => (
+        <span key={index}>
+          {product.productName} ({product.quantity})
+        </span>
+      ))}
+    </div>
+  ),
+
+  totalQuantity: <span className="font-medium">{item.totalQuantity}</span>,
+
+  totalAmount: (
+    <span className="text-red-600 font-medium">
+      {item.totalAmount} TK
+    </span>
+  ),
+
+  totalProfit: (
+    <span
+      className={
+        item.totalProfit >= 0
+          ? "text-green-600 font-medium"
+          : "text-red-600 font-medium"
+      }
+    >
+      {item.totalProfit} TK
+    </span>
+  ),
+
+  note: item.note || "-",
+
+  createdAt: item.createdAt
+    ? new Date(item.createdAt).toLocaleDateString("en-GB")
+    : "N/A",
+
+  action: (
+    <div className="flex gap-3">
+      <a
+        href={`/dashboard/returns/${item._id}`}
+        className="text-blue-600 hover:underline"
+      >
+        Edit
+      </a>
+
+      {/* Delete Button */}
+      {/* <DeleteReturnButton id={item._id as string} /> */}
+    </div>
+  ),
+}));
 
   return (
     <div className="bg-white shadow rounded-lg p-4">
       <h2 className="font-bold mb-3">Return History</h2>
 
-      <div className="overflow-x-auto">
-        <table className="w-full border">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="border p-2">Sale</th>
-              <th className="border p-2">Product</th>
-              <th className="border p-2">Qty</th>
-              <th className="border p-2">Amount</th>
-              <th className="border p-2">Note</th>
-            </tr>
-          </thead>
+      <CustomTable columns={columns} data={tableData} />
 
-          <tbody>
-            {data.map((item, i) => (
-              <tr key={i}>
-                <td className="border p-2">{item.saleNumber}</td>
-                <td className="border p-2">{item.product}</td>
-                <td className="border p-2">{item.qty}</td>
-                <td className="border p-2">{item.amount}</td>
-                <td className="border p-2">{item.note}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <DashPaginationButton
+        currentPage={page}
+        totalPages={totalPages}
+        onPageChange={(newPage) => setPage(newPage)}
+        className="mt-4"
+      />
     </div>
   );
 };
