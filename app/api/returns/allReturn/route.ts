@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSalesCollection } from "@/lib/database/db_collections";
+import { getReturnCollection } from "@/lib/database/db_collections";
 
 export async function GET(req: NextRequest) {
   try {
@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
 
     const skip = (currentPage - 1) * pageSize;
 
-    const returnsCollection = await getSalesCollection()
+    const returnsCollection = await getReturnCollection()
    
 
 

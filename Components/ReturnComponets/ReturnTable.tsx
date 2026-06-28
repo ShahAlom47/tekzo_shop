@@ -1,11 +1,13 @@
 "use client";
 
-import { getAllReturn } from "@/lib/allApiRequest/returnRequest/returnRequest";
-import { useQuery } from "@tanstack/react-query";
+import { deleteReturn, getAllReturn } from "@/lib/allApiRequest/returnRequest/returnRequest";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { DashPaginationButton } from "../CommonComponents/DashPaginationButton";
 import { Return } from "@/interfaces/returnInterface";
 import { CustomTable } from "../CommonComponents/CustomTable";
+import { useConfirm } from "@/hook/useConfirm";
+import toast from "react-hot-toast";
 
 type Props = {
   refresh: boolean;
@@ -14,6 +16,10 @@ type Props = {
 const ReturnTable = ({ refresh }: Props) => {
   const [page, setPage] = useState(1);
   const limit = 30;
+
+    const [loading, setLoading] = useState(false);
+  const { confirm, ConfirmModal } = useConfirm();
+  const queryClient = useQueryClient();
 
   const { data, isLoading } = useQuery({
     queryKey: ["returns", page, refresh],
@@ -25,11 +31,49 @@ const ReturnTable = ({ refresh }: Props) => {
     },
     placeholderData: (prev) => prev,
   });
-console.log(data);
+
   if (isLoading) return <p>Loading...</p>;
 
   const returnData = (data?.data as Return[]) || [];
   const totalPages = data?.totalPages || 1;
+
+  const handelDelete = async (id: string | undefined) => {
+  
+     const ok = await confirm({
+      title: "Delete Product",
+      message: "Are you sure you want to delete this product?",
+      confirmText: "Yes, Delete",
+      cancelText: "Cancel",
+    });
+
+    if (!ok) return;
+      if (!id) return;
+
+    try {
+      setLoading(true);
+
+      const res = await deleteReturn(id);
+      console.log(res)
+
+      if (res?.success) {
+        toast.success("Product deleted!");
+
+        // ✅ Invalidate products query
+        queryClient.invalidateQueries({
+          queryKey: ["returns"],
+        });
+
+      } else {
+        toast.error("Failed to delete Customer");
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+}
+
 
 const columns = [
   { header: "Sale No", accessor: "saleNumber" },
@@ -90,10 +134,13 @@ const tableData = returnData.map((item) => ({
       </a>
 
       {/* Delete Button */}
-      {/* <DeleteReturnButton id={item._id as string} /> */}
-    </div>
+     <button className="text-red-600 hover:underline cursor-pointer" onClick={() => handelDelete(item?._id?.toString())}>
+        Delete
+        </button>
+      </div>
   ),
 }));
+
 
   return (
     <div className="bg-white shadow rounded-lg p-4">
@@ -107,6 +154,7 @@ const tableData = returnData.map((item) => ({
         onPageChange={(newPage) => setPage(newPage)}
         className="mt-4"
       />
+      {ConfirmModal}
     </div>
   );
 };

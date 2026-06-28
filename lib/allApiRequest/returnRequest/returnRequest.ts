@@ -1,4 +1,4 @@
-import { AddSaleRequest, Sale } from "@/interfaces/saleInterfaces";
+
 import { request } from "../apiRequests";
 import { Return } from "@/interfaces/returnInterface";
 
@@ -14,6 +14,7 @@ interface ParamsType {
 export const addReturn = async (data: Return) => {
   return request("POST", "/returns/add", {...data});
 }
+
   export const getAllReturn = async (params: ParamsType) => {
   const {
     currentPage,
@@ -39,12 +40,6 @@ export const addReturn = async (data: Return) => {
   return request("GET", url, undefined, undefined, undefined);
 };
 
-
-export  const getSaleById = async (id:string) => {
-  return request("GET", `/sales/${id}`);
-} 
-
-
-export  const saleDelete = async (id:string) => {
-  return request("DELETE", `/sales/delete/${id}`);
+export  const deleteReturn = async (id:string) => {
+  return request ("DELETE", `/returns/delete/${id}`);
 } 

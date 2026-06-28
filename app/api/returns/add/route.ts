@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSalesCollection } from "@/lib/database/db_collections";
+import { getReturnCollection, getSalesCollection } from "@/lib/database/db_collections";
 
 export async function POST(req: NextRequest) {
   try {
@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const salesCollection = await getSalesCollection();
+    const salesCollection = await getReturnCollection();
 
     const nowISO = new Date().toISOString();
 
