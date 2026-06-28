@@ -43,3 +43,6 @@ export const addReturn = async (data: Return) => {
 export  const deleteReturn = async (id:string) => {
   return request ("DELETE", `/returns/delete/${id}`);
 } 
+export  const getSingleReturn = async (id:string) => {
+  return request ("GET", `/returns/getSingle/${id}`);
+} 

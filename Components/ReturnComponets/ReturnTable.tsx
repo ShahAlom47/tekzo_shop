@@ -8,6 +8,8 @@ import { Return } from "@/interfaces/returnInterface";
 import { CustomTable } from "../CommonComponents/CustomTable";
 import { useConfirm } from "@/hook/useConfirm";
 import toast from "react-hot-toast";
+import CustomModal from "../CommonComponents/CustomModal";
+import EditReturn from "./EditReturn";
 
 type Props = {
   refresh: boolean;
@@ -19,6 +21,8 @@ const ReturnTable = ({ refresh }: Props) => {
 
     const [loading, setLoading] = useState(false);
   const { confirm, ConfirmModal } = useConfirm();
+  const [editeData, setEditData] = useState<Return | null>(null);
+  const [openEditModal, setOpenEditModal] = useState(false);
   const queryClient = useQueryClient();
 
   const { data, isLoading } = useQuery({
@@ -126,12 +130,16 @@ const tableData = returnData.map((item) => ({
 
   action: (
     <div className="flex gap-3">
-      <a
-        href={`/dashboard/returns/${item._id}`}
+      
+      <button
         className="text-blue-600 hover:underline"
+        onClick={() => {
+          setEditData(item);
+          setOpenEditModal(true);
+        }}  
       >
         Edit
-      </a>
+      </button>
 
       {/* Delete Button */}
      <button className="text-red-600 hover:underline cursor-pointer" onClick={() => handelDelete(item?._id?.toString())}>
@@ -154,6 +162,9 @@ const tableData = returnData.map((item) => ({
         onPageChange={(newPage) => setPage(newPage)}
         className="mt-4"
       />
+      <CustomModal open={openEditModal} onOpenChange={() => setOpenEditModal(false)}>
+     <EditReturn returnData={editeData} setEditData={setEditData} setOpenEditModal={setOpenEditModal} />
+      </CustomModal>
       {ConfirmModal}
     </div>
   );

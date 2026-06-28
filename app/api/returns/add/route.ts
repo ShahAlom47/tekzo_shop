@@ -1,5 +1,6 @@
+import { Return } from './../../../../interfaces/returnInterface';
 import { NextRequest, NextResponse } from "next/server";
-import { getReturnCollection, getSalesCollection } from "@/lib/database/db_collections";
+import { getReturnCollection} from "@/lib/database/db_collections";
 
 export async function POST(req: NextRequest) {
   try {
@@ -23,7 +24,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const salesCollection = await getReturnCollection();
+    const returnCollection = await getReturnCollection();
 
     const nowISO = new Date().toISOString();
 
@@ -43,7 +44,7 @@ export async function POST(req: NextRequest) {
       createdAt: nowISO,
     };
 
-    const result = await salesCollection.insertOne(returnData);
+    const result = await returnCollection.insertOne(returnData);
 
     return NextResponse.json({
       success: true,
