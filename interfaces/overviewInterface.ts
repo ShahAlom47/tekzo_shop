@@ -76,6 +76,7 @@ export interface Overview {
     topPaymentMethod?: PaymentMethod;
   };
 }
-export type OverviewFilter =
-  | { type: "today" }
-  | { type: "custom"; month: string }; // month in "YYYY-MM" format
+export interface OverviewFilter {
+  type: "today" | "custom";
+  month?: string;
+}

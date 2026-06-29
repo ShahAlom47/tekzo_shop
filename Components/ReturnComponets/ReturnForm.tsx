@@ -116,7 +116,6 @@ const handleSubmit = async () => {
     const response = await addReturn(payload);
     if(!response?.success) {
         toast.error("Failed to add return");
-        console.log("RETURN RESPONSE =>", response);
     } else {
         toast.success("Return added successfully");
     }   

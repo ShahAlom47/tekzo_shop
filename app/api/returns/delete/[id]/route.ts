@@ -9,7 +9,6 @@ export async function DELETE(
 ) {
   try {
     const { id } = await params;
-    console.log(id)
     const returnCollection = await getReturnCollection();
 
     if (!id) {
@@ -19,7 +18,7 @@ export async function DELETE(
       );
     }
       const  find = await returnCollection.findOne({_id: new ObjectId(id) });
-      console.log(find)
+    
       if(!find){
         return NextResponse.json(       
     { message: "Return not found", success: false },    
@@ -30,7 +29,7 @@ export async function DELETE(
 
     // MongoDB এর ObjectId তে রূপান্তর
     const result = await returnCollection.deleteOne({_id: new ObjectId(id) });
-    console.log(result)
+
 
     if (result.deletedCount === 0) {
       return NextResponse.json(

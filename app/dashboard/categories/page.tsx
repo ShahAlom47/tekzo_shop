@@ -54,7 +54,6 @@ const ManageCategory = () => {
     },
     refetchOnWindowFocus: false,
   });
-  console.log("category data", category);
 
   const handleDelete = async (id: string | ObjectId) => {
     const ok = await confirm({

@@ -11,6 +11,7 @@ import { PaymentMethod } from "@/interfaces/saleInterfaces";
 import { Overview } from "@/interfaces/overviewInterface";
 
 type DateRange = { startDate?: string; endDate?: string };
+  
 
 // 🔥 Build MongoDB date filter
 const buildDateFilter = (field: string, range: DateRange) => {
@@ -61,6 +62,8 @@ export async function GET(req: NextRequest) {
     const endDate = url.searchParams.get("endDate") || undefined;
 
     const dateRange = getDateRangeFromQuery(type, startDate, endDate);
+
+    console.log(startDate , endDate)
 
     // ------------------------
     // Collections

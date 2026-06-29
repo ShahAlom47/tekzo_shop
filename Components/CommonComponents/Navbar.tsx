@@ -20,6 +20,11 @@ export default function StoreNavbar() {
       roles: ["admin", "staff"],
     },
     {
+      name: "Summary",
+      href: "/dashboard/summary",
+      roles: ["admin", "staff"],
+    },
+    {
       name: "Products",
       href: "/dashboard/products",
       roles: ["admin", "staff"],  

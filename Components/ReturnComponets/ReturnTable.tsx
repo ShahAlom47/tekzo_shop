@@ -57,7 +57,6 @@ const ReturnTable = ({ refresh }: Props) => {
       setLoading(true);
 
       const res = await deleteReturn(id);
-      console.log(res)
 
       if (res?.success) {
         toast.success("Product deleted!");
