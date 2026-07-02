@@ -4,64 +4,74 @@ import React, { useState } from "react";
 import Logo from "./Logo";
 import Logout from "../CommonComponents/Logout";
 import StoreNavbar from "../CommonComponents/Navbar";
-// import { Menu, X } from "lucide-react";
 
 const SideBar = () => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      {/* Mobile Top Bar */}
-      <div className="md:hidden bb flex items-center justify-between p-4 bg-white border-b shadow-sm">
-        <button onClick={() => setOpen(true)}>
-          {/* <Menu size={24} /> */}
-          Menu
-        
+      {/* Mobile Header */}
+      <header className="sticky top-0 z-40 flex h-16 items-center justify-between border-b bg-white px-4 shadow-sm md:hidden">
+        <button
+          onClick={() => setOpen(true)}
+          className="flex h-10 w-10 flex-col items-center justify-center gap-1 rounded-lg transition hover:bg-gray-100"
+        >
+          <span className="h-0.5 w-5 rounded-full bg-gray-700"></span>
+          <span className="h-0.5 w-5 rounded-full bg-gray-700"></span>
+          <span className="h-0.5 w-5 rounded-full bg-gray-700"></span>
         </button>
-        <Logo />
-      </div>
+
+        <div className="font-semibold text-lg">Dashboard</div>
+
+        <div className="w-10" />
+      </header>
 
       {/* Overlay */}
-      {open && (
-        <div
-          className="fixed inset-0 bg-black/40 z-40 md:hidden"
-          onClick={() => setOpen(false)}
-        />
-      )}
+      <div
+        onClick={() => setOpen(false)}
+        className={`fixed inset-0 z-40 bg-black/40 transition-opacity duration-300 md:hidden ${
+          open ? "opacity-100 visible" : "opacity-0 invisible"
+        }`}
+      />
 
       {/* Sidebar */}
-      <div
-        className={`fixed md:static top-0 left-0 z-50 h-screen w-50 bg-gray-50 border-r border-gray-200 shadow-sm transform transition-transform duration-300
+      <aside
+        className={`fixed left-0 top-0 z-50 flex h-screen w-64 flex-col border-r border-gray-200 bg-white shadow-xl transition-transform duration-300
         ${open ? "translate-x-0" : "-translate-x-full"}
-        md:translate-x-0`}
+        md:static md:translate-x-0 md:shadow-md`}
       >
-        <div className="flex flex-col justify-between h-full">
+        {/* Header */}
+        <div className="border-b bg-gradient-to-r from-indigo-600 to-blue-500 px-5 py-4 text-white">
+          <h2 className="mt-2 text-center text-xl font-bold">TekzoBD</h2>
+          <p className="mt-1 text-center text-sm text-indigo-100">
+            Business Management System
+          </p>
 
-          {/* Close button (Mobile only) */}
-          <div className="md:hidden flex justify-end p-4">
-            <button onClick={() => setOpen(false)}>
-              {/* <X size={22} /> */}
-              x
+          {/* Mobile Close */}
+          <div className="mt-4 flex justify-center md:hidden">
+            <button
+              onClick={() => setOpen(false)}
+              className="rounded-lg border border-white/30 px-4 py-1 text-sm hover:bg-white/10"
+            >
+              ✕ Close
             </button>
           </div>
-
-          {/* Top */}
-          <div className="flex flex-col items-center gap-4 pt-2 pb-4 border-b border-gray-200">
-            <Logo />
-          </div>
-
-          {/* Navigation */}
-          <div className="flex-1 overflow-y-auto px-3 py-4 bb">
-            <StoreNavbar />
-          </div>
-
-          {/* Bottom */}
-          <div className="border-t border-gray-200 p-4 bg-white">
-            <Logout />
-          </div>
-
         </div>
-      </div>
+
+        {/* Navigation */}
+        <div className="flex-1 overflow-y-auto px-3 py-4">
+          <StoreNavbar />
+        </div>
+
+        {/* Footer */}
+        <div className="border-t bg-gray-50 p-4">
+          <Logout />
+
+          <div className="mt-4 border-t pt-3 text-center text-xs text-gray-400">
+            Version 1.0.0
+          </div>
+        </div>
+      </aside>
     </>
   );
 };
