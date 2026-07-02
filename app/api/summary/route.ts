@@ -26,103 +26,165 @@ export async function GET() {
       expenseCollection.find().toArray(),
       paymentCollection.find().toArray(),
     ]);
+
     const monthNames = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
 
-const summary = monthNames.map((name, index) => ({
-  month: index + 1,
-  monthName: name,
+    const summary = monthNames.map((name, index) => ({
+      month: index + 1,
+      monthName: name,
 
-  totalSales: 0,
-  totalProfit: 0,
-  totalQuantity: 0,
+      totalSales: 0,
+      totalProfit: 0,
+      totalQuantity: 0,
 
-  expense: 0,
-  collection: 0,
-  stockBuy: 0,
+      expense: 0,
+      collection: 0,
+      stockBuy: 0,
 
-  due: 0,
-  actualProfit: 0,
-  remainingAmount: 0,
-  profitMargin: 0,
-}));
+      due: 0,
+      actualProfit: 0,
+      remainingAmount: 0,
+      profitMargin: 0,
+    }));
 
-const overall = {
-  totalSales: 0,
-  totalProfit: 0,
-  totalQuantity: 0,
-  expense: 0,
-  actualProfit: 0,
-  collection: 0,
-  due: 0,
-  stockBuy: 0,
-  remainingAmount: 0,
-};
+    // =======================
+    // Sales
+    // =======================
+    for (const sale of sales) {
+      const date = new Date(sale.createdAt);
 
-for (const sale of sales) {
-  const month = new Date(sale.createdAt).getMonth();
+      if (isNaN(date.getTime())) continue;
 
-  summary[month].totalSales += sale.totalAmount;
+      const item = summary[date.getMonth()];
 
-  summary[month].totalProfit += sale.totalProfit;
+      item.totalSales += Number(sale.totalAmount || 0);
+      item.totalProfit += Number(sale.totalProfit || 0);
 
-  const quantity = sale.products.reduce(
-    (total, product) => total + product.quantity,
-    0
-  );
+      const quantity =
+        sale.products?.reduce(
+          (total: number, product: any) =>
+            total + Number(product.quantity || 0),
+          0,
+        ) || 0;
 
-  summary[month].totalQuantity += quantity;
-}
-for (const expense of expenses) {
-  const month = new Date(expense.expenseDate).getMonth();
+      item.totalQuantity += quantity;
+    }
 
-  summary[month].expense += expense.amount;
-}
+    // =======================
+    // Expenses
+    // =======================
+    for (const expense of expenses) {
+      const date = new Date(expense.expenseDate);
 
-for (const payment of payments) {
-  const month = new Date(payment.paymentDate).getMonth();
+      if (isNaN(date.getTime())) continue;
 
-  summary[month].collection += payment.amount;
-}
-for (const purchase of purchases) {
-  const month = new Date(purchase.date).getMonth();
+      const item = summary[date.getMonth()];
 
-  summary[month].stockBuy += purchase.grandTotal;
-}
+      item.expense += Number(expense.amount || 0);
+    }
 
+    // =======================
+    // Payments
+    // =======================
+    for (const payment of payments) {
+      const date = new Date(payment.paymentDate);
 
-for (const item of summary) {
-  overall.totalSales += item.totalSales;
-  overall.totalProfit += item.totalProfit;
-  overall.totalQuantity += item.totalQuantity;
-  overall.expense += item.expense;
-  overall.actualProfit += item.actualProfit;
-  overall.collection += item.collection;
-  overall.due += item.due;
-  overall.stockBuy += item.stockBuy;
-  overall.remainingAmount += item.remainingAmount;
-}
+      if (isNaN(date.getTime())) continue;
 
-return NextResponse.json({
-  success: true,
-  data: {
-    monthly: summary,
-    overall,
-  },
-});
- 
+      const item = summary[date.getMonth()];
+
+      item.collection += Number(payment.amount || 0);
+    }
+
+    // =======================
+    // Purchases
+    // =======================
+    for (const purchase of purchases) {
+      const date = new Date(purchase.date);
+
+      if (isNaN(date.getTime())) continue;
+
+      const item = summary[date.getMonth()];
+
+      item.stockBuy += Number(purchase.grandTotal || 0);
+    }
+
+    // =======================
+    // Monthly Calculations
+    // =======================
+    for (const item of summary) {
+      item.actualProfit = item.totalProfit - item.expense;
+
+      item.due = item.totalSales - item.collection;
+
+      item.remainingAmount = item.collection - item.stockBuy - item.expense;
+
+      item.profitMargin =
+        item.totalSales > 0
+          ? Number(((item.totalProfit / item.totalSales) * 100).toFixed(2))
+          : 0;
+    }
+
+    // =======================
+    // Overall Summary
+    // =======================
+    const overall = {
+      totalSales: 0,
+      totalProfit: 0,
+      totalQuantity: 0,
+
+      expense: 0,
+      collection: 0,
+      stockBuy: 0,
+
+      actualProfit: 0,
+      due: 0,
+      remainingAmount: 0,
+      profitMargin: 0,
+    };
+
+    for (const item of summary) {
+      overall.totalSales += item.totalSales;
+      overall.totalProfit += item.totalProfit;
+      overall.totalQuantity += item.totalQuantity;
+
+      overall.expense += item.expense;
+      overall.collection += item.collection;
+      overall.stockBuy += item.stockBuy;
+    }
+
+    overall.actualProfit = overall.totalProfit - overall.expense;
+
+    overall.due = overall.totalSales - overall.collection;
+
+    overall.remainingAmount =
+      overall.collection - overall.stockBuy - overall.expense;
+
+    overall.profitMargin =
+      overall.totalSales > 0
+        ? Number(((overall.totalProfit / overall.totalSales) * 100).toFixed(2))
+        : 0;
+
+    return NextResponse.json({
+      success: true,
+      data: {
+        monthly: summary,
+        overall,
+      },
+    });
   } catch (error) {
     console.error(error);
 
@@ -131,7 +193,9 @@ return NextResponse.json({
         success: false,
         message: "Failed to fetch summary data",
       },
-      { status: 500 }
+      {
+        status: 500,
+      },
     );
   }
 }
