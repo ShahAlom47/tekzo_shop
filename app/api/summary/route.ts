@@ -6,8 +6,19 @@ import {
   getSalesCollection,
 } from "@/lib/database/db_collections";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    // =======================
+    // Get Selected Year
+    // =======================
+    const { searchParams } = new URL(request.url);
+
+    const currentYear = new Date().getFullYear();
+    const year = Number(searchParams.get("year")) || currentYear;
+
+const startDate = new Date(year, 0, 1).toISOString();
+const endDate = new Date(year + 1, 0, 1).toISOString();
+
     const [
       saleCollection,
       purchaseCollection,
@@ -21,10 +32,41 @@ export async function GET() {
     ]);
 
     const [sales, purchases, expenses, payments] = await Promise.all([
-      saleCollection.find().toArray(),
-      purchaseCollection.find().toArray(),
-      expenseCollection.find().toArray(),
-      paymentCollection.find().toArray(),
+      saleCollection
+        .find({
+          createdAt: {
+            $gte: startDate,
+            $lt: endDate,
+          },
+        })
+        .toArray(),
+
+      purchaseCollection
+        .find({
+          date: {
+            $gte: startDate,
+            $lt: endDate,
+          },
+        })
+        .toArray(),
+
+      expenseCollection
+        .find({
+          expenseDate: {
+            $gte: startDate,
+            $lt: endDate,
+          },
+        })
+        .toArray(),
+
+      paymentCollection
+        .find({
+          paymentDate: {
+            $gte: startDate,
+            $lt: endDate,
+          },
+        })
+        .toArray(),
     ]);
 
     const monthNames = [
@@ -75,9 +117,9 @@ export async function GET() {
 
       const quantity =
         sale.products?.reduce(
-          (total: number, product: any) =>
+          (total: number, product: { quantity: number }) =>
             total + Number(product.quantity || 0),
-          0,
+          0
         ) || 0;
 
       item.totalQuantity += quantity;
@@ -130,7 +172,8 @@ export async function GET() {
 
       item.due = item.totalSales - item.collection;
 
-      item.remainingAmount = item.collection - item.stockBuy - item.expense;
+      item.remainingAmount =
+        item.collection - item.stockBuy - item.expense;
 
       item.profitMargin =
         item.totalSales > 0
@@ -175,12 +218,15 @@ export async function GET() {
 
     overall.profitMargin =
       overall.totalSales > 0
-        ? Number(((overall.totalProfit / overall.totalSales) * 100).toFixed(2))
+        ? Number(
+            ((overall.totalProfit / overall.totalSales) * 100).toFixed(2)
+          )
         : 0;
 
     return NextResponse.json({
       success: true,
       data: {
+        year,
         monthly: summary,
         overall,
       },
@@ -195,7 +241,7 @@ export async function GET() {
       },
       {
         status: 500,
-      },
+      }
     );
   }
 }
